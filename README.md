@@ -1,6 +1,6 @@
-# Dial.js
-*doesn't get in your way*
-Dial.js is a stateful browser history framework built on jQuery with History.js. It simplifies browser history integration of event-driven interfaces.
+# Dial.js  
+*doesn't get in your way*  
+Dial.js is a stateful browser history framework built on jQuery with History.js. It simplifies browser history integration of event-driven interfaces.  
 
 jQuery 1.12.3: https://jquery.com/download/
 
