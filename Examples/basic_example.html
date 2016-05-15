@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>Basic Dial Example</title>
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+		<script	src="https://cdn.rawgit.com/browserstate/history.js/master/scripts/bundled/html5/jquery.history.js"></script>
+		<script src="https://cdn.rawgit.com/danielteichman/Dial.js/public/Dial.js"></script>
+		<script>
+			//write browser history changes to JavaScript console
+			History.Adapter.bind(window, 'statechange', function() {
+				hs = History.getState();
+				console.log(hs.data);
+			});
+		</script>
+		<style>
+			/* hide all first-level <div> elements that are in the <body> */
+			body > div {
+				display:none;
+			}
+			
+			div.header {
+				font-weight:bold;
+				font-style:italic;
+				font-family: Sans-Serif;
+				font-size:+2em;
+			}
+			
+			.visible {
+				display:initial;
+			}
+			
+			a.back::after {
+				content: 'Go back'
+			}
+			
+			a, a:visited {
+				color:blue;
+			}
+		</style>
+		<script>
+			//code for this page
+			var pageDial = DialFactory.makeDial("page dial", true, 'data-dial');
+			pageDial.addState("visible", function(selector) {
+				$("body > div").removeClass('visible');
+				$(selector).addClass('visible');
+			});
+			
+			var backDial = DialFactory.makeDial("back dial", false, 'href');
+			backDial.addState('go back', function(data) {
+				history.back();
+			});
+
+			var MAIN_DIV = '#mainPage'; //selector for main page
+			$(document).ready(function() {
+				//connect elements to dials
+				pageDial.associateElements('.wire_window', 'click', 'visible');
+				backDial.associateElements('.back', 'click', 'go back');
+				//set visible state on main page's selector
+				pageDial.trigger(MAIN_DIV, 'visible');
+			});
+
+		</script>
+	</head>
+	<body>
+		<div id="mainPage">
+			<div class="header">Main page</div>
+			<hr>
+			<a class="wire_window" href="#" data-dial="#aboutDial">About Dial</a><br />
+			<br />
+			<a class="wire_window" href="#" data-dial="#dialVsBackbone">Dial vs MVC</a><br />
+			<br />
+			<p>After visiting one of these pages and then returning with a back link or button, try using your browser's forward button, then back button.</p>
+			<p>You can view history state changes as they happen with your browser's JavaScript console.</p>
+		</div>
+		<div id="aboutDial">
+			<div class="header">About Dial.js</div>
+			<p>Dial.js is a stateful browser history framework built on jQuery with History.js. It simplifies browser history integration of event-driven interfaces.</p>
+			<a class="back" href="#"></a>
+		</div>
+		<div id="dialVsBackbone">
+			<div class="header">Dial.js vs MVC</div>
+			<p>Dial.js simplifies browser history integration into any application for any purpose.  It is, however, easy to implement the MVC pattern in a page with Dial.js.</p>
+			<a class="back" href="#"></a>
+		</div>
+	</body>
+</html>
