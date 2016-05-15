@@ -1,5 +1,5 @@
 # Dial.js
-A javascript interface library that integrates jQuery 1.x with History.js (jquery.history.js) with simple, stateful logic.
+A javascript interface library that integrates jQuery 1.x with History.js (jquery.history.js) with simple, stateful logic.  It was designed to support mobile applications built with HTML5.
 
 jQuery 1.12.3: https://jquery.com/download/
 
