@@ -1,5 +1,5 @@
 # Dial.js
-A javascript interface library that integrates jQuery 1.x with History.js (jquery.history.js) with stateful logic that simplifies browser history integration of event-driven interfaces.  It was designed to support mobile applications built with HTML5.
+Dial.js is a stateful browser history framework built on jQuery with History.js. It simplifies browser history integration of event-driven interfaces.
 
 jQuery 1.12.3: https://jquery.com/download/
 
