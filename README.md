@@ -13,5 +13,4 @@ History.js: https://github.com/browserstate/history.js/blob/master/scripts/bundl
 
 Bootstrap (recommended): http://getbootstrap.com/
 
-Dial.js is provided under the MIT License
-https://tldrlegal.com/license/mit-license
+Dial.js is provided under the [MIT License](https://tldrlegal.com/license/mit-license)
