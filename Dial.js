@@ -31,8 +31,11 @@ var Dial = function(dialName, historic, selectorAttribute) {
     this.states = {};
     this.stateHandlers = {};
 
-    this.trigger = function(selector, stateName) {
-        this.stateHandlers[stateName].callback(selector);
+    this.trigger = function(data, stateName, historic = this.historic) {
+        if(this.historic)
+            this.stateHandlers[stateName].callback(data);
+        else
+            this.states[stateName](data);
     }
 
     this.addState = function(stateName, fn) {
