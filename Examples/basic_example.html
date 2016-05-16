@@ -45,8 +45,9 @@
 					$(selector).addClass('visible');
 				},
 				function(data, oldhash) {
-					console.log(data);
-					return data;
+					newhash = '?page='+data.substring(1);
+					console.log('New query string is '+newhash);
+					return newhash;
 				}
 			);
 			
