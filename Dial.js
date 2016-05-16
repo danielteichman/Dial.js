@@ -96,6 +96,7 @@ var Dial = function(dialName, historic, selectorAttribute) {
 
 }
 
+var _dial_loaded = false;
 History.Adapter.bind(window, 'statechange', function() {
     try {
         hsdata = History.getState().data;
@@ -108,12 +109,10 @@ History.Adapter.bind(window, 'statechange', function() {
             _dial.states[hsdata.state](hsdata.data);
 
         }
-		else if (hsdata.moduleName == 'Dial.js Loading') {
-			history.back();
+		else if(_dial_loaded) {
+			history.go(0); //not a perfect solution
+			//reloads the page if user backtracks to before the first Dial state
 		}
-        else {
-            //history.go(0); //not a perfect solution
-        }
     }
     catch (err) {
         //not our problem
@@ -121,9 +120,11 @@ History.Adapter.bind(window, 'statechange', function() {
 });
 
 History.pushState({
-    moduleName: "Dial.js Loading",
+    moduleName: "Dial.js Reload Please",
     dial: "None",
     state: "Page load",
     data: "No data",
     id: -1
 }, null, null);
+
+_dial_loaded = true;
