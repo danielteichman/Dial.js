@@ -61,12 +61,6 @@
 				//connect elements to dials
 				pageDial.associateElements('.wire_window', 'click', 'visible');
 				backDial.associateElements('.back', 'click', 'go back');
-				
-				//get rid of hash
-				if(window.location.hash.length > 0) {
-					history.back();
-				}
-				
 				//set visible state on main page's selector
 				pageDial.trigger(MAIN_DIV, 'visible');
 			});
