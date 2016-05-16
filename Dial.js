@@ -71,8 +71,6 @@ var Dial = function(dialName, historic, selectorAttribute) {
 							);
             }
             else {
-				if(this.hasHashEffector)
-					//History.pushState(this.hashEffectors[stateName](data, window.location.hash));
                 this.dial.states[stateName](data);
             }
         }
@@ -103,9 +101,6 @@ History.Adapter.bind(window, 'statechange', function() {
         if (hsdata.moduleName == DialFactory.moduleName) {
 
             _dial = DialFactory.allDials[hsdata.id];
-			if(hsdata.he) {
-				//History.pushState(null,null,_dial.hashEffectors[hsdata.state](hsdata.data, window.location.hash));
-			}
             _dial.states[hsdata.state](hsdata.data);
 
         }

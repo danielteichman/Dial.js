@@ -52,9 +52,12 @@
 			);
 			
 			var backDial = DialFactory.makeDial("back dial", false, 'href');
-			backDial.addState('go back', function(data) {
-				history.back();
-			});
+			backDial.addState('go back',
+				function(data) {
+					console.log()
+					history.go(-1);
+				}
+			);
 
 			var MAIN_DIV = '#mainPage'; //selector for main page
 			$(document).ready(function() {

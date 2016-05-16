@@ -52,9 +52,12 @@
 			);
 			
 			var backDial = DialFactory.makeDial("back dial", false, 'href');
-			backDial.addState('go back', function(data) {
-				history.back();
-			});
+			backDial.addState('go back',
+				function(data) {
+					console.log()
+					history.go(-1);
+				}
+			);
 
 			var MAIN_DIV = '#mainPage'; //selector for main page
 			$(document).ready(function() {
@@ -77,7 +80,7 @@
 		<div id="mainPage">
 			<div class="header">Main page</div>
 			<hr>
-			<a class="wire_window" href="?" data-dial="#aboutDial">About Dial</a><br />
+			<a class="wire_window" href="#" data-dial="#aboutDial">About Dial</a><br />
 			<br />
 			<a class="wire_window" href="#" data-dial="#dialVsBackbone">Dial vs MVC</a><br />
 			<br />
