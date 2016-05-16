@@ -9,7 +9,7 @@ Dial.js is a browser history framework built on jQuery with History.js. It simpl
 <br/>
 ####The `DialFactory` object <br/>
 
-- `DialFactory.makedial(dialName, historic, selectorAttribute)` <br/> Returns  a new `Dial` object <br/> *Example* `var dialName = DialFactory.makeDial('my first dial', true, data-application-attribute);`
+- `DialFactory.makedial(dialName, historic, selectorAttribute)` <br/> Returns  a new `Dial` object <br/> *Example* `var dialVar = DialFactory.makeDial('my first dial', true, data-application-attribute);`
   - `dialName` The name of the new `Dial` object that will be returned by this function
   - `historic` determines whether changes to the new `Dial` object's state will be recorded into the browser history
   - `selectorAttribute` *(optional*) contains the name of the `data` attribute that DOM elements will provide to the new `Dial` object's state functions (default `data-dial-js`)
