@@ -58,6 +58,12 @@
 
 			var MAIN_DIV = '#mainPage'; //selector for main page
 			$(document).ready(function() {
+				qPos = window.location.href.indexOf('?');
+				if(qPos > -1) {
+					console.log("Query string is "+window.location.href.substring(qPos));
+				} else {
+					console.log("No query string provided (*.html?var=value)");
+				}
 				//connect elements to dials
 				pageDial.associateElements('.wire_window', 'click', 'visible');
 				backDial.associateElements('.back', 'click', 'go back');
