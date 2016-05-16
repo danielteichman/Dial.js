@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Dial.js by danielteichman</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Dial.js</h1>
+        <h2>Dial.js is a JavaScript library that makes managing the browser history effortless so you can code the way you want.</h2>
+        <a href="https://github.com/danielteichman/Dial.js" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="dialjs" class="anchor" href="#dialjs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dial.js</h1>
+
+<p><em>the most fun you can have with jQuery and browser history states</em> <br>
+ <br>
+Dial.js is a browser history framework built on jQuery with History.js. It simplifies browser history integration of event-driven interfaces and provides a simple alternative to MVC frameworks for single-page applications (SPAs). <br>
+<br>
+<a href="https://cdn.rawgit.com/danielteichman/Dial.js/5b703917c1c6bbe31a72accb090f1a0b2e76e617/Examples/basic_example.html">View the basic example</a> <br>
+ <br></p>
+
+<h2>
+<a id="exposed-api" class="anchor" href="#exposed-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Exposed API</h2>
+
+<p><br></p>
+
+<h4>
+<a id="the-dialfactory-object-" class="anchor" href="#the-dialfactory-object-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>DialFactory</code> object <br>
+</h4>
+
+<ul>
+<li>
+<p><code>DialFactory.makedial(dialName, historic, selectorAttribute)</code> <br> Returns  a new <code>Dial</code> object <br> <em>Example</em> <code>var dialVar = DialFactory.makeDial('my first dial', true, data-application-attribute);</code></p>
+
+<ul>
+<li>
+<code>dialName</code> The name of the new <code>Dial</code> object that will be returned by this function</li>
+<li>
+<code>historic</code> determines whether changes to the new <code>Dial</code> object's state will be recorded into the browser history</li>
+<li>
+<code>selectorAttribute</code> <em>(optional</em>) contains the name of the <code>data</code> attribute that DOM elements will provide to the new <code>Dial</code> object's state functions (default <code>data-dial-js</code>)</li>
+</ul>
+</li>
+<li><p><code>DialFactory.setSelectorAttribute(selectorAttribute)</code> <br> Sets the default <code>selectorAttribute</code> for future instances of <code>Dial</code> objects (default <code>data-dial-js</code>)</p></li>
+</ul>
+
+<h4>
+<a id="the-dial-object-" class="anchor" href="#the-dial-object-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>Dial</code> object <br>
+</h4>
+
+<p><strong>Note: <code>Dial</code> objects must be instantiated through the <code>DialFactory</code></strong></p>
+
+<ul>
+<li>
+<p><code>dialVar.addState(stateName, fn, queryEffector)</code> Adds code to apply a state from the <code>Dial</code> object.</p>
+
+<ul>
+<li>
+<code>stateName</code> the name of the state that will be added to the <code>Dial</code>
+</li>
+<li>
+<code>fn</code> the function that will be called when the state named <code>stateName</code> is applied. This function will recieve one argument called <code>data</code>
+</li>
+<li>
+<em>optional</em> <code>queryEffector</code> a function that will be called when a state is applied to change the <code>?var=val</code> query string in the URL bar. This function will recieve two arguments, the same <code>data</code> that was passed to <code>fn</code> and also the <code>oldquery</code> old query string.</li>
+</ul>
+</li>
+<li>
+<p><code>dialVar.associateElements(selector, event, stateName)</code> associate DOM elements with a state of the <code>Dial</code> object</p>
+
+<ul>
+<li>
+<code>selector</code> the jQuery selector of the elements that will activate the state <code>stateName</code>
+</li>
+<li>
+<code>event</code> the DOM event that will activate the state <code>stateName</code> when it occurs from any elements matched by the <code>selector</code>
+</li>
+<li>
+<code>stateName</code> the name of the state that will be applied from this <code>Dial</code>
+</li>
+</ul>
+</li>
+<li>
+<p><code>dialVar.trigger(data, stateName, historic)</code> <br> Applies the state <code>stateName</code> belonging to this <code>Dial</code> object, passing argument <code>data</code> to the state's function.</p>
+
+<ul>
+<li>
+<code>data</code> argument to pass to the state function</li>
+<li>
+<code>stateName</code> name of the state to apply from this <code>Dial</code> object</li>
+<li>
+<code>historic</code> <em>optional</em> overrides this <code>Dial</code> object's default history-recording behavior where <code>true</code> means the new state will be part of the browser history and <code>false</code> means the new state will be applied without affecting the browser history.</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources</h2>
+
+<ul>
+<li>jQuery 1.12.3: <a href="https://jquery.com/download/">https://jquery.com/download/</a><br>
+</li>
+<li>History.js: <a href="https://github.com/browserstate/history.js/blob/master/scripts/bundled/html5/jquery.history.js">https://github.com/browserstate/history.js/blob/master/scripts/bundled/html5/jquery.history.js</a><br>
+</li>
+<li>Bootstrap (recommended): <a href="http://getbootstrap.com/">http://getbootstrap.com/</a><br>
+</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Dial.js is provided under the <a href="https://tldrlegal.com/license/mit-license">MIT License</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/danielteichman/Dial.js/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/danielteichman/Dial.js/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/danielteichman/Dial.js"></a> is maintained by <a href="https://github.com/danielteichman">danielteichman</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
