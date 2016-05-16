@@ -1,7 +1,7 @@
 # Dial.js  
 *the most fun you can have with jQuery and browser history states* <br/>
  <br/>
-Dial.js is a browser history framework built on jQuery with History.js. It simplifies browser history integration of event-driven interfaces and provides a simple alternative to MVC frameworks, especially for single-page applications (SPAs). <br/>
+Dial.js is a browser history framework built on jQuery with History.js. It simplifies browser history integration of event-driven interfaces and provides a simple alternative to MVC frameworks for single-page applications (SPAs). <br/>
 <br/>
 [View the basic example](https://cdn.rawgit.com/danielteichman/Dial.js/5b703917c1c6bbe31a72accb090f1a0b2e76e617/Examples/basic_example.html) <br/>
  <br/>
