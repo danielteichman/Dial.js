@@ -30,6 +30,7 @@ var Dial = function(dialName, historic, selectorAttribute) {
     this.dial = this;
     this.states = {};
     this.stateHandlers = {};
+	this.hashEffectors = {};
 
     this.trigger = function(data, stateName, historic = this.historic) {
         if(this.historic)
@@ -38,14 +39,22 @@ var Dial = function(dialName, historic, selectorAttribute) {
             this.states[stateName](data);
     }
 
-    this.addState = function(stateName, fn) {
+    this.addState = function(stateName, fn, hashEffector = null) {
         //actual toggle function
         this.states[stateName] = fn;
+		
+		//hashEffector
+		this.hashEffectors[stateName] = hashEffector;
 
         //object that wraps toggle function
         this.stateHandlers[stateName] = {};
         this.stateHandlers[stateName].dial = this.dial;
         this.stateHandlers[stateName].stateName = stateName;
+		if(hashEffector != null) {
+			this.stateHandlers[stateName].hasHashEffector = true;
+		} else {
+			this.stateHandlers[stateName].hasHashEffector = false;
+		}
 
         this.stateHandlers[stateName].callback = function(data) {
             //push history object if needed
@@ -55,10 +64,15 @@ var Dial = function(dialName, historic, selectorAttribute) {
                     dial: this.dial.dialName,
                     state: stateName,
                     data: data,
-                    id: this.dial.id
-                }, null, null);
+                    id: this.dial.id,
+					he: this.hasHashEffector
+                }, null, 	(this.hasHashEffector)?this.dial.hashEffectors[stateName](
+								data, window.location.href.substring(window.location.href.indexOf('?'))):null
+							);
             }
             else {
+				if(this.hasHashEffector)
+					//History.pushState(this.hashEffectors[stateName](data, window.location.hash));
                 this.dial.states[stateName](data);
             }
         }
@@ -88,11 +102,17 @@ History.Adapter.bind(window, 'statechange', function() {
         if (hsdata.moduleName == DialFactory.moduleName) {
 
             _dial = DialFactory.allDials[hsdata.id];
+			if(hsdata.he) {
+				//History.pushState(null,null,_dial.hashEffectors[hsdata.state](hsdata.data, window.location.hash));
+			}
             _dial.states[hsdata.state](hsdata.data);
 
         }
+		else if (hsdata.moduleName == 'Dial.js Loading') {
+			history.back();
+		}
         else {
-            history.go(0); //not a perfect solution
+            //history.go(0); //not a perfect solution
         }
     }
     catch (err) {
