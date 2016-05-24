@@ -33,7 +33,7 @@ var Dial = function(dialName, historic, selectorAttribute) {
 	this.hashEffectors = {};
 
     this.trigger = function(data, stateName, historic = this.historic) {
-        if(this.historic)
+        if(historic)
             this.stateHandlers[stateName].callback(data);
         else
             this.states[stateName](data);
