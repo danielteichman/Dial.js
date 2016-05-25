@@ -9,6 +9,7 @@ var DialFactory = new function() {
     this.allDials = {};
 
     this.makeDial = function(dialName = 'Unnamed Dial', historic = false, selectorAttribute = null) {
+        var ret;
         if (selectorAttribute == null)
             ret = new Dial(dialName, historic, this.selectorAttribute);
         else
@@ -16,11 +17,11 @@ var DialFactory = new function() {
         ret.id = this.next_id++;
         this.allDials[ret.id] = ret;
         return ret;
-    }
+    };
     this.setSelectorAttribute = function(name) {
         this.selectorAttribute = name;
-    }
-}
+    };
+};
 
 var Dial = function(dialName, historic, selectorAttribute) {
     this.moduleName = 'Dial.js';
@@ -37,7 +38,7 @@ var Dial = function(dialName, historic, selectorAttribute) {
             this.stateHandlers[stateName].callback(data);
         else
             this.states[stateName](data);
-    }
+    };
 
     this.addState = function(stateName, fn, hashEffector = null) {
         //actual toggle function
@@ -73,8 +74,8 @@ var Dial = function(dialName, historic, selectorAttribute) {
             else {
                 this.dial.states[stateName](data);
             }
-        }
-    }
+        };
+    };
 
 
     this.associateElements = function(a_selector, event, state) {
@@ -90,12 +91,15 @@ var Dial = function(dialName, historic, selectorAttribute) {
                 event.data.dial.stateHandlers[event.data.state].callback($(this).attr(event.data.selectorAttribute));
             });
         });
-    }
+    };
 
-}
+};
 
 var _dial_loaded = false;
 History.Adapter.bind(window, 'statechange', function() {
+    var hsdata;
+    var _dial;
+    
     try {
         hsdata = History.getState().data;
         if (hsdata.moduleName == DialFactory.moduleName) {
