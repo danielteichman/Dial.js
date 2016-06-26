@@ -12,9 +12,9 @@ Dial.js is a single-page application framework and a browser history framework b
 - `DialFactory.makedial(dialName, historic, selectorAttribute)` <br/> Returns  a new `Dial` object <br/> *Example* `var dialVar = DialFactory.makeDial('my first dial', true, data-application-attribute);`
   - `dialName` The name of the new `Dial` object that will be returned by this function
   - `historic` determines whether changes to the new `Dial` object's state will be recorded into the browser history
-  - `selectorAttribute` *(optional*) contains the name of the `data` attribute that DOM elements will provide to the new `Dial` object's state functions (default `data-dial-js`)
+  - `selectorAttribute` contains the name of the `data` attribute that DOM elements will provide to the new `Dial` object's state functions
 
-- `DialFactory.setSelectorAttribute(selectorAttribute)` <br/> Sets the default `selectorAttribute` for future instances of `Dial` objects (default `data-dial-js`)
+- `DialFactory.setSelectorAttribute(selectorAttribute)` <br/> Sets the default `selectorAttribute` for future instances of `Dial` objects
 
 ####The `Dial` object <br/>
 **Note: `Dial` objects must be instantiated through the `DialFactory`**
@@ -32,7 +32,7 @@ Dial.js is a single-page application framework and a browser history framework b
 - `dialVar.trigger(data, stateName, historic)` <br/> Applies the state `stateName` belonging to this `Dial` object, passing argument `data` to the state's function.
   - `data` argument to pass to the state function
   - `stateName` name of the state to apply from this `Dial` object
-  - `historic` *optional* overrides this `Dial` object's default history-recording behavior where `true` means the new state will be part of the browser history and `false` means the new state will be applied without affecting the browser history.
+  - `historic` overrides this `Dial` object's default history-recording behavior where `true` means the new state will be part of the browser history and `false` means the new state will be applied without affecting the browser history.
 
 
 
