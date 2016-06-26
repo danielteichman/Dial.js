@@ -1,5 +1,5 @@
 /*
-    Dial.js
+    Dial.js - the SPA framework that lets you do it all yourself
 */
 
 var DialFactory = new function() {
@@ -8,7 +8,20 @@ var DialFactory = new function() {
     this.next_id = 0;
     this.allDials = {};
 
-    this.makeDial = function(dialName = 'Unnamed Dial', historic = false, selectorAttribute = null) {
+    this.makeDial = function(dialName, historic, selectorAttribute) {
+        if (typeof selectorAttribute == "undefined") {
+            selectorAttribute = null;
+        }
+        if (typeof dialName == "undefined") {
+            dialName = "Unnamed Dial";
+        } else if (dialName == null) {
+            dialName = "Unnamed Dial";
+        }
+        if (typeof historic == "undefined") {
+            historic = false;
+        } else if (historic == null) {
+            historic = false;
+        }
         var ret;
         if (selectorAttribute == null)
             ret = new Dial(dialName, historic, this.selectorAttribute);
@@ -33,14 +46,17 @@ var Dial = function(dialName, historic, selectorAttribute) {
     this.stateHandlers = {};
 	this.hashEffectors = {};
 
-    this.trigger = function(data, stateName, historic = this.historic) {
+    this.trigger = function(data, stateName, historic) {
         if(historic)
             this.stateHandlers[stateName].callback(data);
         else
             this.states[stateName](data);
     };
 
-    this.addState = function(stateName, fn, hashEffector = null) {
+    this.addState = function(stateName, fn, hashEffector) {
+        if(typeof hashEffector == "undefined") {
+            hashEffector = null;
+        }
         //actual toggle function
         this.states[stateName] = fn;
 		
